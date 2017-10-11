@@ -1,0 +1,1 @@
+ubuntu ansible_ssh_host=172.16.9.99 ansible_ssh_port=22

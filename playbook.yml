@@ -1,0 +1,49 @@
+---
+- name: Deploy Jenkins on Ubuntu Linux
+  hosts: ubuntu 
+  gather_facts: yes 
+  become: yes
+
+  tasks: 
+  - name: Update all packages to the latest version
+    apt:
+      upgrade: dist
+
+  - name: Install Java 
+    apt: 
+      name: openjdk-8-jdk
+      state: present 
+      update_cache: yes 
+      cache_valid_time: 3600
+          
+  - name: Install Maven 
+    apt: 
+      name: maven 
+      state: present
+      update_cache: yes 
+      cache_valid_time: 3600
+
+  - name: Add the Jenkins repository key 
+    apt_key:
+      url: https://pkg.jenkins.io/debian/jenkins-ci.org.key
+      state: present
+
+  - name: Add the Jenkins repository
+    apt_repository:
+      repo: deb http://pkg.jenkins.io/debian-stable binary/
+      state: present
+
+  - name: Install Jenkins
+    apt:
+      name: jenkins
+      state: present
+      update_cache: yes
+
+  - name: Remove useless packages from the cache
+    apt:
+      autoclean: yes
+
+  - name: Remove dependencies that are no longer required
+    apt:
+      autoremove: yes
+...

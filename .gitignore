@@ -1,0 +1,4 @@
+.git/
+.vagrant/
+playbook.retry
+*.log
