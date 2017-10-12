@@ -16,6 +16,13 @@
       update_cache: yes 
       cache_valid_time: 3600
           
+  - name: Install Maven 
+    apt: 
+      name: maven 
+      state: present
+      update_cache: yes 
+      cache_valid_time: 3600
+
   - name: Add the Jenkins repository key 
     apt_key:
       url: https://pkg.jenkins.io/debian/jenkins-ci.org.key
